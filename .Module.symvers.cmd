@@ -1,1 +1,0 @@
-cmd_/home/roman/Desktop/ioctl/Module.symvers := sed 's/\.ko$$/\.o/' /home/roman/Desktop/ioctl/modules.order | scripts/mod/modpost -m -a  -o /home/roman/Desktop/ioctl/Module.symvers -e -i Module.symvers   -T -

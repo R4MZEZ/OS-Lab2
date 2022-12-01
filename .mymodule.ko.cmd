@@ -1,1 +1,0 @@
-cmd_/home/roman/Desktop/ioctl/mymodule.ko := ld -r  -m elf_x86_64 -z noexecstack   --build-id=sha1  -T scripts/module.lds -o /home/roman/Desktop/ioctl/mymodule.ko /home/roman/Desktop/ioctl/mymodule.o /home/roman/Desktop/ioctl/mymodule.mod.o;  true
