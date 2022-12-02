@@ -13,14 +13,19 @@
 #define SIG SIGRTMIN
 
 
-int main() {
+int main(int argc, char *argv[]) {
+
+	if(argc != 2) {
+		printf("Gimme only one argument <PID>.\n");
+		return 0;
+	}
 
 
-	struct timer_params t_params = {.pid = 470, .expires = -1, 
+	struct timer_params t_params = {.pid = atoi(argv[1]), .expires = -1, 
 					.head = NULL, .elist = NULL, 
 					.firing = -1};
 	
-	struct mmap_params m_params = {.pid = 470, .vm_start = -1, 
+	struct mmap_params m_params = {.pid = atoi(argv[1]), .vm_start = -1, 
 					.vm_end = -1, .vm_flags = -1,
 					.vm_next = NULL, .vm_prev = NULL,
 					.rb_subtree_gap = -1, .vm_mm = NULL,
