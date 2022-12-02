@@ -11,6 +11,8 @@ struct timer_params{
 	size_t pid;
 	unsigned long expires;
 	struct timerqueue_head* head;
+	struct list_head *elist;
+	int firing;
 };
 
 struct mmap_params{
@@ -18,6 +20,10 @@ struct mmap_params{
 	unsigned long vm_start;
 	unsigned long vm_end;
 	unsigned long vm_flags;
+	struct vm_area_struct *vm_next, *vm_prev;
+	unsigned long rb_subtree_gap;
+	struct mm_struct *vm_mm;
+	struct file * vm_file;	
 };
 
 #endif

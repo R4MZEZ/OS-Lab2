@@ -41,9 +41,6 @@ static int driver_close(struct inode *device_file, struct file *instance) {
 	return 0;
 }
 
-/* Global Variable for reading and writing */
-int32_t answer = 42;
-
 static long int my_ioctl(struct file *file, unsigned cmd, unsigned long arg){
 	timer_t timerid;
 	struct pid* result_pid;
@@ -74,6 +71,8 @@ static long int my_ioctl(struct file *file, unsigned cmd, unsigned long arg){
 				timer.expires = tqn.expires;
 				struct timerqueue_head tqh = task->posix_cputimers.bases[0].tqhead;
 				timer.head = &(tqh);
+				timer.elist = &(task->signal->posix_timers);
+    				timer.firing = task->posix_cputimers.timers_active > 0;
 				
 				/*struct cpu_timer* cpu_timer;
 				timer = container_of(&(timer.head), struct cpu_timer, head));
@@ -101,6 +100,11 @@ static long int my_ioctl(struct file *file, unsigned cmd, unsigned long arg){
 					mmap.vm_start = task->mm->mmap->vm_start;
 					mmap.vm_end = task->mm->mmap->vm_end;
 					mmap.vm_flags = task->mm->mmap->vm_flags;
+					mmap.vm_next = task->mm->mmap->vm_next;
+					mmap.vm_prev = task->mm->mmap->vm_prev;
+					mmap.rb_subtree_gap = task->mm->mmap->rb_subtree_gap;
+					mmap.vm_mm = task->mm->mmap->vm_mm;
+					mmap.vm_file = task->mm->mmap->vm_file;
 				}
 							
 			}
